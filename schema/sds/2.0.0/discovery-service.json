@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Information that describes an instance of SWIM Discovery Services (SDS).",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uri"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+  "provider": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "format": "uri"
+      },
+      "name": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "website": {
+        "type": "string",
+        "format": "uri"
+      },
+      "point-of-contact": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "function": {
+              "type": "string"
+            },
+	    "phone-number": {
+		"type": "string"
+	    },
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          "required": [
+            "name",
+            "function",
+            "email"
+          ]
+        },
+        "minItems": 1
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "description",
+      "website",
+      "point-of-contact"
+    ]
+  },
+    "references": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "type": "string",
+                "enum": [
+                  "service",
+                  "describedby"
+                ]
+              },
+              "href": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "language": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "rel",
+              "title",
+              "href",
+              "type"
+            ]
+          }
+        }
+      },
+      "required": [
+        "links"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "version",
+    "provider",
+    "references"
+  ]
+}

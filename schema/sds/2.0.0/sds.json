@@ -1,0 +1,143 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SWIM Discovery Service API 2.0.0",
+    "description": "API for for implementing by a SWIM program. (Version 2.0.0)",
+    "contact": {
+      "name": "FAA SWIM Governance Lead",
+      "email": "Saugat.J.Prasai@faa.gov"
+    },
+    "version": "2.0.0"
+  },
+  "paths": {
+    "/discovery-service": {
+      "get": {
+        "summary": "Returns information about a specific SDS.",
+        "description": "Allows a client to retrieve a description of a discovery service resource.",
+        "operationId": "GetDiscoveryService",
+        "responses": {
+          "200": {
+            "description": "A representation of DiscoveryService object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "discovery-service.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/peers": {
+      "get": {
+        "summary": "Returns collection of references to other discovery services (peers).",
+        "description": "Allows a client to retrieve a peers resource",
+        "operationId": "GetPeers",
+        "responses": {
+          "200": {
+            "description": "A representation of Peers object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "peers.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services": {
+      "get": {
+        "summary": "Returns an index of SWIM service descriptions (services) offered by the invoked SDS",
+        "description": "Allows a client to retrieve a services resource",
+        "operationId": "GetServices",
+        "parameters": [
+          {
+            "name": "availability-status",
+            "in": "query",
+            "description": "Values as defined in http://semantics.aero/availability-status",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interface-type",
+            "in": "query",
+            "description": "Values as defined in http://semantics.aero/interface-type",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "service-category",
+            "in": "query",
+            "description": "Values as defined in http://semantics.aero/service-category",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A representation of Services object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "services.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service-description": {
+      "get": {
+        "summary": "Returns a SWIM service description.",
+        "description": "Allows a client to retrieve a single service description resource.",
+        "operationId": "GetServiceDescription",
+        "parameters": [
+          {
+            "name": "service-id",
+            "in": "query",
+            "description": "A reference to a service obtained from implementing GetServices operation (the attribute \"service-id\" in the received representation).",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A representation of ServiceDescription object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "service-description.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No service is identified by the given service-id."
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,250 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Model",
+	"description": "This schema defines the Model part of a service description, part of a service description that tells a service requester how to construct an invocation message and interpret a response message.",
+	"type": "object",
+	"properties": {
+		"interface": {
+			"description": "A named set (logical grouping) of operations.",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "The name of the interface.",
+					"type": "string"
+				},
+				"description": {
+					"description": "A description of the interface.",
+					"type": "string"
+				},
+				"category": { 
+					"description": "The type of the interface the service deploys.",
+					"$ref": "utility.json#/properties/taxonomy" 
+				},
+				"operation": {
+					"description": "Zero or more operations offered by the interface.",
+					"type": "array",
+					"items": {
+						"type": "object",
+						"required": [
+							"name",
+							"description"
+						],
+						"properties": {
+							"name": {
+								"description": "The name of the operation.",
+								"type": "string"
+							},
+							"description": {
+								"description": "A description of the operation.",
+								"type": "string"
+							},
+							"synchronicity": {
+								"description": "A value that indicates whether the operation is synchronous or not (asynchronous).",
+								"type": "string",
+								"enum": [
+									"synchronous", 
+									"asynchronous"
+								]
+							},
+							"precondition": {
+								"description": "A description of the state or condition that should be true before the operation can proceed.",
+								"type": "string"
+							},
+
+
+							"input": {
+								"description": "The name of the input message that initiates interaction with the operation.",
+								"type": "string"
+							},
+							"output": {
+								"description": "The name of the output message produced in response to a service request.",
+								"type": "string"
+							},
+							"effect": {
+								"description": "A description of the state or condition that exists after the operation is completed, assuming no error has occurred.",
+								"type": "string"
+							},
+
+
+
+							"message-exchange-pattern": {
+								"description": "A value that indicates the pattern of message exchange between interacting components.",
+								"type": "string",
+								"enum": [
+									"in-out",
+									"out-in",
+									"in-only",
+									"out-only"
+								]
+							},
+							"message": {
+								"description": "Zero or more messages associated with the operation.",
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"description": "The name of the message.",
+											"type": "string"
+										},
+										"description": {
+											"description": "A description of the message.",
+											"type": "string"
+										},
+										"direction": {
+											"description": "A value that indicates whether the message is input (in) or output (out).",
+											"type": "string",
+											"enum": [
+												"in",
+												"out"
+											]
+										},
+										"header": {
+											"description": "A collection of zero or more name-value pairs (fields) that provides information about how the message should be processed or interpreted.",
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"name": {
+														"description": "The name of the header field.",
+														"type": "string"
+													},
+													"description": {
+														"description": "A description of the header field.",
+														"type": "string"
+													},
+													"permissible-value": {
+														"description": "A value of the header field.",
+														"type": "string"
+													}
+												}
+											}
+										},
+										"payload": {
+											"description": "The data entity transferred by a message.",
+											"type": "object",
+											"properties": {
+												"payload-type": {
+													"description": "A value that indicates the format of the data transferred by the message.",
+													"type": "string",
+													"enum": [
+														"text",
+														"stream",
+														"map",
+														"object",
+														"byte"
+													]
+												},
+												"name": {
+													"description": "The name given to the data entity that constitutes the payload.",
+													"type": "string"
+												},
+												"description": {
+													"description": "A description of the payload data entity.",
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"data-specification": {
+			"description": "One or more document that defines and describes the meaning, structure, inter-relationships, permissible values, and other aspects of a data entity.",
+			"type": "object",
+			"properties": {
+				"formal-language": {
+					"description": "The language in which the document is written.",
+					"type": "string"
+				},
+				"information-exchange-model": {
+					"description": "Name of the information exchange model that the payload data conforms to.",
+					"type": "string"
+				},
+				"source": {
+					"description": "A document from which the data specification is derived or cited.",
+					"type": "object",
+					"$ref": "utility.json#/properties/document"
+				}
+			}
+		},
+		"resource": {
+			"description": "An information item identified by a URI that a client can interact with through a set of standard methods.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"description": "The unique persistent resource identifier presented as URI.",
+						"type": "string",
+						"format": "uri"
+					},
+					"name": {
+						"description": "The name of the resource.",
+						"type": "string"
+					},
+					"description": {
+						"description": "A description of the resource.",
+						"type": "string"
+					},
+					"path": {
+						"description": "A relative path to the URI that identifies the resource in the context of the API.",
+						"type": "string",
+						"format": "uri"
+					},
+					"method": {
+						"type": "string",
+						"enum": [
+							"GET",
+							"POST",
+							"PUT",
+							"DELETE",
+							"PATCH",
+							"CONNECT",
+							"TRACE"
+						]
+					},
+					"template": {
+						"description": "A resource URI syntax that includes variables (parameters) that must be substituted before the URI is resolved.",
+						"type": "string",
+						"format": "uri"
+					},
+					"parameter": {
+						"description": "Parameters applicable to this resource.",
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"description": "The name of the parameter.",
+									"type": "string"
+								},
+								"description": {
+									"description": "A description of the parameter.",
+									"type": "string"
+								},
+								"parameter-type": {
+									"description": "A value that indicates the type of the parameter.",
+									"type": "string",
+									"enum": [
+										"path",
+										"query",
+										"header"
+									]
+								},
+								"permissible-value": {
+									"description": "A set of values (zero or more) that the parameter may accept.",
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

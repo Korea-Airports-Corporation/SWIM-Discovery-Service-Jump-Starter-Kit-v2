@@ -1,0 +1,455 @@
+[
+  {
+    "service-id": "SMXS-2.0.0",
+    "name": "SWIM Metadata Exchange Service (SMXS)",
+    "version": "2.0.0",
+    "description": "The SWIM Metadata Exchange Service (SMXS) provides discovery and lookup services for SWIM resources in the ROK SWIM testbed.",
+    "filtering-available": "The services resource supports filtering by service-category, interface-type, and availability-status.",
+    "category": "discovery",
+    "profile": {
+      "service-lifecycle-status": {
+        "status": {
+          "id": "http://semantics.aero/availability-status#prospective",
+          "name": "Prospective",
+          "source": "http://semantics.aero/availability-status"
+        },
+        "date": "2024-03-27"
+      },
+      "provider": {
+        "name": "Korea Airports Corporation",
+        "website": "www.airport.co.kr",
+        "description": "KAC is a state-owned company comprehensively managing 14 regional airports in Korea. KAC ensures efficient aviation industry support and smooth air transportation throughout the national economy.",
+        "point-of-contact": {
+          "name": "Sehwan Han",
+          "function": "Manager",
+          "email": "hsh91@airport.co.kr",
+          "phone-number": "+82-2-2660-4376"
+        }
+      },
+      "geographical-extent": {
+        "id": "RKRR-FIR",
+        "name": "Incheon FIR",
+        "description": "Entire Incheon Flight Information Region covering Republic of Korea airspace.",
+        "source": {
+          "id": "https://ais.casa.go.kr/",
+          "title": "Republic of Korea Aeronautical Information Service",
+          "publisher": "Korea Office of Civil Aviation",
+          "date-issued": "2024-03-27",
+          "version": "Current",
+          "location": "https://ais.casa.go.kr/"
+        },
+        "geometry": "POLYGON((124.0 33.0, 132.0 33.0, 132.0 39.0, 124.0 39.0, 124.0 33.0))"
+      },
+      "environmental-constraint": [
+        {
+          "name": "Cloud Deployment",
+          "description": "Hosted on Naver Cloud Platform (NCP) for global scalability and 24/7 managed operations."
+        },
+        {
+          "name": "Security & Connectivity",
+          "description": "Integrated within NCP VPC and Security Groups to ensure isolated and secure metadata exchange."
+        }
+      ],
+      "access-restrictions": "Restricted to authorized ROK SWIM participants with valid API credentials.",
+      "quality-of-service": [
+        {
+          "name": "availability",
+          "value": "99.9%",
+          "description": "Discovery service uptime guarantee for metadata access."
+        },
+        {
+          "name": "time behavior",
+          "value": "< 100ms",
+          "description": "Maximum latency for service description retrieval."
+        }
+      ],
+      "service-validation": {
+        "type": "self-validation",
+        "description": "Verified by KAC against SWIM Discovery Service Specification 2.0.0."
+      }
+    },
+    "model": {
+      "interface": {
+        "name": "SWIM Metadata Exchange Service (SMXS)",
+        "description": "REST-style SDS 2.0.0 interface for discovery-service, peers, services, and service-description resources.",
+        "category": {
+          "id": "http://semantics.aero/interface-type#resource-oriented",
+          "name": "Resource-Oriented",
+          "source": "http://semantics.aero/interface-type"
+        }
+      },
+      "data-specification": {
+        "information-exchange-model": "SWIM Discovery Service (SDS) Specification v2.0.0",
+        "formal-language": "JSON / JSON Schema",
+        "source": {
+          "id": "https://github.com/faa-swim/swim-discovery-service/tree/main/sds/2.0.0",
+          "title": "SWIM Discovery Service (SDS) Specification",
+          "publisher": "FAA SWIM Governance Service",
+          "date-issued": "2024-03-27",
+          "version": "2.0.0",
+          "location": "https://github.com/faa-swim/swim-discovery-service/tree/main/sds/2.0.0"
+        }
+      },
+      "resource": [
+        {
+          "id": "{{SDS_BASE_URL}}/discovery-service",
+          "name": "SDS Instance Metadata",
+          "description": "Access root instance metadata for the KAC SWIM SDS.",
+          "path": "{{SDS_BASE_URL}}/discovery-service",
+          "method": "GET",
+          "parameter": [
+            {
+              "name": "Accept",
+              "description": "Required media type (application/json).",
+              "parameter-type": "header",
+              "permissible-value": ["application/json"]
+            },
+            {
+              "name": "Accept-Language",
+              "description": "Required language (en).",
+              "parameter-type": "header",
+              "permissible-value": ["en"]
+            }
+          ]
+        },
+        {
+          "id": "{{SDS_BASE_URL}}/peers",
+          "name": "SDS Peer Discovery",
+          "description": "Provides a list of inter-connected SDS nodes in the network.",
+          "path": "{{SDS_BASE_URL}}/peers",
+          "method": "GET",
+          "parameter": [
+            {
+              "name": "Accept",
+              "description": "Required media type (application/json).",
+              "parameter-type": "header",
+              "permissible-value": ["application/json"]
+            },
+            {
+              "name": "Accept-Language",
+              "description": "Required language (en).",
+              "parameter-type": "header",
+              "permissible-value": ["en"]
+            }
+          ]
+        },
+        {
+          "id": "{{SDS_BASE_URL}}/services",
+          "name": "SDS Service Catalog",
+          "description": "Provides a list of services registered in the network.",
+          "path": "{{SDS_BASE_URL}}/services",
+          "method": "GET",
+          "parameter": [
+            {
+              "name": "Accept",
+              "description": "Required media type (application/json).",
+              "parameter-type": "header",
+              "permissible-value": ["application/json"]
+            },
+            {
+              "name": "Accept-Language",
+              "description": "Required language (en).",
+              "parameter-type": "header",
+              "permissible-value": ["en"]
+            }
+          ]
+        },
+        {
+          "id": "{{SDS_BASE_URL}}/service-description",
+          "name": "SDS Service Description",
+          "description": "Provides a full SDS 2.0.0 Service Description for a specific service.",
+          "path": "{{SDS_BASE_URL}}/service-description",
+          "method": "GET",
+          "parameter": [
+            {
+              "name": "Accept",
+              "description": "Required media type (application/json).",
+              "parameter-type": "header",
+              "permissible-value": ["application/json"]
+            },
+            {
+              "name": "Accept-Language",
+              "description": "Required language (en).",
+              "parameter-type": "header",
+              "permissible-value": ["en"]
+            }
+          ]
+        }
+      ],
+      "operation": [
+        {
+          "name": "GetDiscoveryService",
+          "description": "Retrieves information about the SDS instance.",
+          "synchronicity": "synchronous",
+          "precondition": "The client provides Accept and Accept-Language headers.",
+          "input": "GetDiscoveryServiceRequest",
+          "output": "JSON",
+          "effect": "The client receives the discovery service representation.",
+          "message-exchange-pattern": "in-out",
+          "message": "GetDiscoveryServiceResponse"
+        },
+        {
+          "name": "GetPeers",
+          "description": "Retrieves a list of inter-connected SDS instances.",
+          "synchronicity": "synchronous",
+          "precondition": "The client provides Accept and Accept-Language headers.",
+          "input": "GetPeersRequest",
+          "output": "JSON",
+          "effect": "The client receives peer SDS references.",
+          "message-exchange-pattern": "in-out",
+          "message": "GetPeersResponse"
+        },
+        {
+          "name": "GetServices",
+          "description": "Retrieves a list of services registered in the SDS instance.",
+          "synchronicity": "synchronous",
+          "precondition": "The client may provide service-category, interface-type, or availability-status query filters.",
+          "input": "GetServicesRequest",
+          "output": "JSON",
+          "effect": "The client receives service summary references.",
+          "message-exchange-pattern": "in-out",
+          "message": "GetServicesResponse"
+        },
+        {
+          "name": "GetServiceDescription",
+          "description": "Retrieves a list of service descriptions requested.",
+          "synchronicity": "synchronous",
+          "precondition": "The client provides a service-id query parameter returned from the services resource.",
+          "input": "GetServiceDescriptionRequest",
+          "output": "JSON",
+          "effect": "The client receives the requested service description.",
+          "message-exchange-pattern": "in-out",
+          "message": "GetServiceDescriptionResponse"
+        }
+      ],
+      "message": [
+        {
+          "name": "GetDiscoveryServiceResponse",
+          "description": "Output for GetDiscoveryService.",
+          "direction": "out",
+          "operation": "GetDiscoveryService",
+          "header": [
+            {
+              "name": "Content-Type",
+              "description": "Media type of the message.",
+              "permissible-value": "application/json"
+            },
+            {
+              "name": "Content-Language",
+              "description": "Language of the message.",
+              "permissible-value": "en"
+            }
+          ],
+          "payload": {
+            "payload-type": "text",
+            "name": "DiscoveryServiceRepresentation",
+            "description": "JSON representation of the Discovery Service metadata."
+          }
+        },
+        {
+          "name": "GetPeersResponse",
+          "description": "Output for GetPeers.",
+          "direction": "out",
+          "operation": "GetPeers",
+          "header": [
+            {
+              "name": "Content-Type",
+              "description": "Media type of the message.",
+              "permissible-value": "application/json"
+            },
+            {
+              "name": "Content-Language",
+              "description": "Language of the message.",
+              "permissible-value": "en"
+            }
+          ],
+          "payload": {
+            "payload-type": "text",
+            "name": "PeersRepresentation",
+            "description": "JSON representation of inter-connected SDS peers."
+          }
+        },
+        {
+          "name": "GetServicesResponse",
+          "description": "Output for GetServices.",
+          "direction": "out",
+          "operation": "GetServices",
+          "header": [
+            {
+              "name": "Content-Type",
+              "description": "Media type of the message.",
+              "permissible-value": "application/json"
+            },
+            {
+              "name": "Content-Language",
+              "description": "Language of the message.",
+              "permissible-value": "en"
+            },
+            {
+              "name": "X-Total-Count",
+              "description": "Total number of services retrieved."
+            }
+          ],
+          "payload": {
+            "payload-type": "text",
+            "name": "ServicesRepresentation",
+            "description": "JSON representation of the registered services."
+          }
+        },
+        {
+          "name": "GetServiceDescriptionResponse",
+          "description": "Output for GetServiceDescription.",
+          "direction": "out",
+          "operation": "GetServiceDescription",
+          "header": [
+            {
+              "name": "Content-Type",
+              "description": "Media type of the message.",
+              "permissible-value": "application/json"
+            },
+            {
+              "name": "Content-Language",
+              "description": "Language of the message.",
+              "permissible-value": "en"
+            }
+          ],
+          "payload": {
+            "payload-type": "text",
+            "name": "ServiceDescriptionRepresentation",
+            "description": "JSON representation of a service description."
+          }
+        }
+      ]
+    },
+    "grounding": {
+      "binding": {
+        "name": "SMXS REST Binding",
+        "description": "Standard RESTful binding over HTTP for metadata discovery.",
+        "protocol": {
+          "id": "http://www.ietf.org/rfc/rfc2616.txt",
+          "title": "Hypertext Protocol -- HTTP/1.1",
+          "publisher": "IETF",
+          "date-issued": "1999-06-01",
+          "version": "1.1",
+          "location": "http://www.ietf.org/rfc/rfc2616.txt"
+        },
+        "interface": "SWIM Metadata Exchange Service (SMXS)"
+      },
+      "endpoint": {
+        "name": "KAC SMXS v2.0 Instance",
+        "description": "KAC SMXS v2.0 Instance (Test Only)",
+        "network-address": "{{SDS_BASE_URL}}/"
+      }
+    }
+  },
+  {
+    "service-id": "SIPSA-0.0.1",
+    "name": "Surveillance Information (ADS-B) Publication Service (ASTERIX)",
+    "version": "0.0.1",
+    "description": "Surveillance Information (ADS-B) Publication Service (ASTERIX) for the SWIM over CRV demonstration and surveillance data over SWIM trial",
+    "category": "surveillance",
+    "profile": {
+      "service-lifecycle-status": {
+        "status": {
+          "id": "http://semantics.aero/availability-status#prospective",
+          "name": "Prospective",
+          "source": "http://semantics.aero/availability-status"
+        },
+        "date": "2024-03-28"
+      },
+      "provider": {
+        "name": "Korea Airports Corporation",
+        "website": "www.airport.co.kr",
+        "description": "KAC is a state-owned company comprehensively managing 14 regional airports. KAC wishes to ensure efficient construction, management, and operation while providing smooth air transportation.",
+        "point-of-contact": {
+          "name": "Sehwan Han",
+          "function": "Manager",
+          "email": "hsh91@airport.co.kr",
+          "phone-number": "+82-2-2660-4376"
+        }
+      },
+      "geographical-extent": {
+        "id": "RKRR-FIR-SEL",
+        "name": "Incheon FIR - Seoul Sector",
+        "description": "Seoul sector within Incheon FIR, including Gimpo and Incheon international airports.",
+        "geometry": "POLYGON((125.5 36.5, 127.5 36.5, 127.5 38.5, 125.5 38.5, 125.5 36.5))"
+      },
+      "access-restrictions": "ANSP, Airport Operator, Airlines",
+      "quality-of-service": [
+        {
+          "name": "availability",
+          "value": "99.0%",
+          "description": "Surveillance data feed availability guarantee."
+        }
+      ],
+      "service-validation": {
+        "type": "self-validation",
+        "description": "KAC tested the service instance in accordance with its specification."
+      }
+    },
+    "model": {
+      "interface": {
+        "name": "ADS-B Publication Interface",
+        "category": {
+          "id": "http://semantics.aero/interface-type#message-oriented",
+          "name": "Message-Oriented",
+          "source": "http://semantics.aero/interface-type"
+        }
+      },
+      "data-specification": {
+        "information-exchange-model": "BINARY (ASTERIX CAT. 21)",
+        "formal-language": "ASTERIX Binary Format"
+      },
+      "operation": [
+        {
+          "name": "GetSurveillanceData",
+          "description": "This operation provides surveillance data in ASTERIX CAT 21.",
+          "synchronicity": "asynchronous",
+          "output": "BINARY (ASTERIX CAT. 21)",
+          "message-exchange-pattern": "out-only",
+          "message": "PublishSurveillanceData"
+        }
+      ],
+      "message": [
+        {
+          "name": "PublishSurveillanceData",
+          "description": "Publish surveillance data to subscriber",
+          "direction": "out",
+          "operation": "GetSurveillanceData",
+          "header": [
+            {
+              "name": "Content-Type",
+              "description": "Media type of the message.",
+              "permissible-value": "application/octet-stream"
+            }
+          ],
+          "payload": {
+            "payload-type": "byte",
+            "name": "ASTERIX-CAT21-Payload",
+            "description": "Binary payload containing ASTERIX CAT 21 surveillance records."
+          }
+        }
+      ]
+    },
+    "grounding": {
+      "binding": {
+        "name": "AMQP 1.0 Binding",
+        "description": "Message-oriented binary binding for real-time data distribution.",
+        "protocol": {
+          "id": "http://www.amqp.org/",
+          "title": "Advanced Message Queuing Protocol (AMQP) v1.0",
+          "publisher": "OASIS",
+          "date-issued": "2012-10-31",
+          "version": "1.0",
+          "location": "http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html"
+        },
+        "interface": "ADS-B Publication Interface"
+      },
+      "endpoint": {
+        "name": "Surveillance Publication Topic",
+        "description": "Real-time surveillance message distribution via AMQP broker.",
+        "network-address": "amqp://172.0.0.1:5672/surveillance.adsb.topic"
+      }
+    }
+  }
+]

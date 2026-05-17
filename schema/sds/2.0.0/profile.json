@@ -1,0 +1,201 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://sdm-j-2.0.0/profile.json",
+	"title": "Profile",
+	"description": "This schema defines the Profile part of a Service Description. See more about Profile in SDCM v.3.0.0",
+	"type": "object",
+	"properties": {
+		"provider": {
+			"type": "object",
+			"$ref": "utility.json#/properties/organization",
+			"description": "The organization that offers the use of capabilities by means of the service."
+		},
+		"consumer": {
+		  "type": "object",
+		  "$ref": "utility.json#/properties/organization",
+		  "description": "An organizational entity that uses the service."
+		},
+		"function": {
+			"description": "A type of activity describing the functionality of the service.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": { 
+						"description": "A name given to the function in the context of the service description.",
+						"type": "string" },
+					"description": {
+						"description": "A description of the function.",
+						"type": "string"
+					},
+					"real-world-effect": {
+						"description": "An ultimate purpose associated with the interaction with the service. It may be the response to a request for information or the change in the state of some entities shared between the participants in the interaction.",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"security-mechanism": {
+			"description": "A process (or a device incorporating such a process) that is used by or within a service to prevent unauthorized or accidental access, change, destruction, or loss of data.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"description": "The name of the security mechanism.",
+						"type": "string"
+					},
+					"description": {
+						"description": "A description of the security mechanism.",
+						"type": "string"
+					},
+					"category": { 
+						"description": "The type of security mechanism that the service employs.",
+						"$ref": "utility.json#/properties/taxonomy" 
+					},
+					"protocol": {
+						"description": "A formal document prescribing rules for secure coordination of interacting components.",
+						"$ref": "utility.json#/properties/document"
+					},
+					"access-restrictions": {
+						"description": "Access Restriction of the security mechanism.",
+						"type": "string"
+					},
+					"information-security-category": {
+						"description": "Information Security Category.",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"policy": {
+			"description": "A statement that defines constraints on the behavior of a managed resource, a user or an organization.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"description": "The name of the policy.",
+						"type": "string"
+					},
+					"description": {
+						"description": "A description of the policy.",
+						"type": "string"
+					},
+					"source": {
+						"description": "A document from which the policy is derived or cited.",
+						"$ref": "utility.json#/properties/document"
+					}
+				}
+			}
+		},
+		"quality-of-service": {
+			"description": "A set of parameters that specify and measure the value of the provided service.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"description": "The name of the quality of service parameter.",
+						"type": "string"
+					},
+					"value": {
+						"description": "The value or range of values that the quality of service parameter is expected to meet or possess.",
+						"type": "string"
+					},
+					"description": {
+						"description": "A description of the quality of service parameter.",
+						"type": "string"
+					},
+					"calculation-method": {
+						"description": "A description of how the quality of service parameter values are measured or calculated.",
+						"type": "string"
+					},
+					"unit-of-measure": {
+						"description": "The unit of measure in which the quality of service parameter values are expressed.",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"geographical-extent": {
+			"type": "object",
+			"description": "A specified geographic area to which the service applies.",
+			"properties": {
+				"id": {
+					"description": "A code or a URI that references a label in a specified scheme.",
+					"type": "string"
+				},
+				"name": {
+					"description": "A name given to the geographical extent.",
+					"type": "string"
+				},
+				"description": {
+					"description": "A description of the geographical extent.",
+					"type": "string"
+				},
+				"source": {
+					"description": "A document from which the geographical extent is derived or cited.",
+					"type": "object",
+					"$ref": "utility.json#/properties/document"
+				},
+				"geometry": {
+					"description": "A set of points in coordinate reference system used to model the geographical extent or shape.",
+					"type": "string"
+				}
+			}
+		},
+		"environmental-constraint": {
+			"type": "array",
+			"description": "A characteristic of the environment or larger system within which the service operates; examples include: capacity of existing enterprise network, firewalls, physical computing resources, etc.",
+
+			"items": {
+				"type": "object",
+				"properties": {
+      					"name": { 
+						"description": "A name given to the environmental constraint in the context of the service description.",
+						"type": "string" 
+					},
+					"description": { 
+						"description": "A description of the environmental constraint.",
+						"type": "string" }
+				}				
+			}
+		},
+		"service-validation": {
+			"description": "Validation method used to assess a service.",
+			"type": "object",
+			"properties": {
+				"type": {
+					"description": "Type of service validation.",
+					"type": "string",
+					"enum": [
+						"independent-validation", 
+						"collaborative-validation", 
+						"user-validation", 
+						"self-validation"
+					]
+				},
+				"description": {
+					"description": "The description of the service validation.",
+					"type": "string"
+				}			
+			}
+		},
+
+		"service-lifecycle-status": {
+			"type": "object",
+  			"properties": {
+    				"status": {
+					"description": "The lifecycle status of a service in accordance with relevant governance policies.", 
+					"$ref": "utility.json#/properties/taxonomy" 
+				},
+    				"date": { 
+					"type": "string", 
+					"format": "date" 
+				}
+			}
+		}
+	},
+	"required": ["provider"]
+}

@@ -1,0 +1,124 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://sdm-j-2.0.0/utility.json",
+	"title": "Utility schema",
+	"description": "This schema defines the part of the Service Description that contains abstract classes for use by other classes.",
+	"type": "object",
+	"properties": {
+		"taxonomy": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "A unique identifier that references a node within a taxonomy.",
+					"type": "string",
+					"format": "uri-reference"
+				},
+				"name": {
+					"description": "The name of the taxonomy.",
+					"type": "string"
+				},
+				"description": {
+					"description": "A description of the taxonomy.",
+					"type": "string"
+				},
+				"source": {
+					"description": "The Web location where a copy of the taxonomy can be obtained.",
+					"type": "string",
+					"format": "uri-reference"
+				}
+			}
+		},
+		"organization": {
+			"description": "A unique framework of authority within which a person or persons act, or are designated to act, towards some purpose. Any department, service, or other entity within an organization which needs to be identified for information exchange.",
+			"type": "object",
+			"properties": {
+				"id": { 
+					"type": "string", 
+					"format": "uri", 
+					"description": "A unique identifier that is used to designate or identify the organization." 
+				},
+				"name": {
+					"description": "The full name (and acronym, if any) of the organization.",
+					"type": "string"
+				},
+				"description": {
+					"description": "A description of the organization.",
+					"type": "string"
+				},
+				"point-of-contact": {
+					"description": "A person or group within an organization, suitable for making a human contact for any purpose.",
+					"type": "object",
+					"properties": {
+						"name": {
+							"description": "The name of the point of contact.",
+							"type": "string"
+						},
+						"function": {
+							"description": "A designation of the position or responsibilities of the point of contact.",
+							"type": "string"
+						},
+						"phone-number": {
+							"description": "A telephone number used to communicate orally with the point of contact.",
+							"type": "string"
+						},
+						"email": {
+							"description": "An email address used to correspond with the point of contact.",
+							"type": "string",
+							"format": "email"
+						}
+					},
+					"required": [ "name", "function", "email" ]
+				}
+			}
+		},
+		"document": {
+			"description": "Any medium with information recorded on or in it.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The unique persistent identifier assigned to the document.",
+					"type": "string",
+					"format": "uri"
+				},
+				"title": {
+					"description": "The name by which the document is formally known.",
+					"type": "string"
+				},
+				"publisher": {
+					"description": "The entity responsible for making the document available.",
+					"type": "string"
+				},
+				"date-issued": {
+					"description": "The date of formal issuance (e.g., publication) of the document.",
+					"type": "string"
+				},
+				"version": {
+					"description": "The current version or revision level of the document.",
+					"type": "string"
+				},
+				"description": {
+					"description": "A description of the document.",
+					"type": "string"
+				},
+				"location": {
+					"description": "The address or Web location where a copy of the document can be obtained.",
+					"type": "string"
+				}
+			}
+		},
+		"enumeration": {
+			"description": "A listing of possible values for an attribute.",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "The name of the enumeration.",
+					"type": "string"
+				},
+				"value": {
+					"description": "One of the enumeration’s listed values.",
+					"type": "string"
+				}
+			}
+		}
+	}
+}

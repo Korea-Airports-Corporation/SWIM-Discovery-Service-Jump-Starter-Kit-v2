@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "service-id": {
+            "type": "string",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string"
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rel": {
+                        "type": "string",
+                        "enum": [
+                          "describedby",
+                          "code"
+                        ]
+                      },
+                      "href": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "text/html"
+                        ]
+                      },
+                      "language": {
+                        "type": "string",
+                        "enum": [
+                          "en"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "rel",
+                      "href",
+                      "title",
+                      "type"
+                    ]
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "category",
+                "links"
+              ]
+            }
+          }
+        },
+        "required": [
+          "service-id",
+          "name",
+          "version",
+          "description",
+          "categories"
+        ]
+      }
+    }
+  },
+  "required": [
+    "services"
+  ]
+}

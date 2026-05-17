@@ -1,0 +1,41 @@
+[
+  {
+    "name": "KAC SMXS",
+    "serviceId": "{{SDS_BASE_URL}}/",
+    "version": "2.0.0",
+    "description": "SWIM Discovery Service Instance operated by KAC (Test Only)",
+    "links": [
+      {
+        "rel": "service",
+        "title": "KAC SMXS",
+        "href": "{{SDS_BASE_URL}}"
+      }
+    ]
+  },
+  {
+    "name": "NSRR SMXS",
+    "serviceId": "https://nsrr.faa.gov/smxs",
+    "version": "2.0.0",
+    "description": "SWIM Discovery Service Instance operated by FAA NSRR",
+    "links": [
+      {
+        "rel": "service",
+        "title": "FAA NSRR SMXS",
+        "href": "https://nsrr.faa.gov/smxs"
+      }
+    ]
+  },
+  {
+    "name": "ENRI SMXS",
+    "serviceId": "http://18.224.226.206:8082/smxs",
+    "version": "2.0.0",
+    "description": "SWIM Discovery Service Instance operated by ENRI",
+    "links": [
+      {
+        "rel": "service",
+        "title": "ENRI SMXS",
+        "href": "http://18.224.226.206:8082/smxs"
+      }
+    ]
+  }
+]

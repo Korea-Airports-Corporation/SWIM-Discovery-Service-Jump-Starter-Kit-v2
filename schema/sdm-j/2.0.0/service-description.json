@@ -1,0 +1,68 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Service Description",
+	"description": "This schema represents the top-level (root) object of the model that specifies a Service Description.",
+	"type": "object",
+				"properties": {
+				"service": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"description": "A unique persistent identifier of the service within a global context.",
+							"type": "string",
+							"format": "uri"
+						},
+						"name": {
+							"description": "The full name (and acronym, if any) of the service.",
+							"type": "string"
+						},
+						"description": {
+							"description": "A brief summary of the service.",
+							"type": "string"
+						},
+						"version": {
+							"description": "The current version of the service.",
+							"type": "string"
+						},
+						"category": {
+							"type": "array",
+							"items": {
+								"$ref": "utility.json#/properties/taxonomy"
+							}
+						},
+						"additional-information": {
+							"description": "Additional Information on the Information Service.",
+							"type": "string"
+						},
+						"filtering-available": {
+							"description": "Description of how responses from the service can be filtered.",
+							"type": "string"
+						},
+						"source-of-information": {
+							"description": "Source of information returned by the service.",
+							"type": "string"
+						},
+						"support-availability": {
+							"description": "Overview of support offered to consumers.",
+							"type": "string"
+						}
+						
+					}
+				},
+				"profile": {
+					"type": "object",
+					"$ref": "profile.json",
+					"maximum": 1
+				},
+				"model": {
+					"type": "object",
+					"$ref": "model.json"
+				},
+				"grounding": {
+					"type": "object",
+					"$ref": "grounding.json"
+				}
+			}
+		
+	
+}

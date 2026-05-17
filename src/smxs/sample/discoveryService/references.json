@@ -1,0 +1,16 @@
+{
+  "links": [
+    {
+      "rel": "service",
+      "href": "{{SDS_BASE_URL}}/discovery-service",
+      "title": "SWIM Metadata Exchange Service (SMXS)",
+      "type": "application/json"
+    },
+    {
+      "rel": "describedby",
+      "title": "SWIM Discovery Service (SDS) Implementation Specification, Version 2.0.0",
+      "href": "https://discovery.swim.aero/sds/2.0.0/SDS%20Specification%202.0%2003192024.pdf",
+      "type": "application/pdf"
+    }
+  ]
+}
