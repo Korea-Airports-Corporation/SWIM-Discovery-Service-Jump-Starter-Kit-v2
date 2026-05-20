@@ -27,14 +27,14 @@
   },
   {
     "name": "ENRI SMXS",
-    "serviceId": "http://18.224.226.206:8082/smxs",
+    "serviceId": "http://18.224.226.206/smxs/v2",
     "version": "2.0.0",
     "description": "SWIM Discovery Service Instance operated by ENRI",
     "links": [
       {
         "rel": "service",
         "title": "ENRI SMXS",
-        "href": "http://18.224.226.206:8082/smxs"
+        "href": "http://18.224.226.206/smxs/v2"
       }
     ]
   }
